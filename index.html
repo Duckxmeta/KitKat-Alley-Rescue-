@@ -4,10 +4,514 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kit Kat Alley Rescue - Saving Lives, One Paw at a Time</title>
-    <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ===========================
+           RESET & BASE STYLES
+           =========================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #FF6B6B;
+            --primary-dark: #E85555;
+            --secondary-color: #4ECDC4;
+            --text-dark: #2D3436;
+            --text-light: #636E72;
+            --bg-light: #F8F9FA;
+            --white: #FFFFFF;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* ===========================
+           NAVIGATION
+           =========================== */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            background: var(--white);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo img {
+            height: 60px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-donate {
+            margin-left: 1rem;
+        }
+
+        .burger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+        }
+
+        .burger div {
+            width: 25px;
+            height: 3px;
+            background: var(--text-dark);
+            transition: all 0.3s;
+            border-radius: 3px;
+        }
+
+        /* ===========================
+           BUTTONS
+           =========================== */
+        .cta-button {
+            display: inline-block;
+            padding: 0.875rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .cta-button.primary {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+
+        .cta-button.primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .cta-button.secondary {
+            background: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .cta-button.secondary:hover {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+
+        .cta-button.full-width {
+            width: 100%;
+            text-align: center;
+        }
+
+        /* ===========================
+           HERO SECTION
+           =========================== */
+        .hero {
+            position: relative;
+            height: 85vh;
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.8) 0%, rgba(78, 205, 196, 0.8) 100%);
+            overflow: hidden;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://i.imgur.com/2JhRPjw.jpeg') center/cover;
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            color: var(--white);
+            padding: 2rem;
+            max-width: 800px;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            margin-bottom: 1rem;
+            font-weight: 700;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+        }
+
+        .hero-content p {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* ===========================
+           CONTENT SECTIONS
+           =========================== */
+        .content-section {
+            padding: 5rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .content-section-colored {
+            padding: 5rem 5%;
+            background: var(--bg-light);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .section-subtitle {
+            font-size: 1.125rem;
+            color: var(--text-light);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        /* ===========================
+           PET CARDS
+           =========================== */
+        .pet-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .pet-card {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .pet-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .pet-card-image {
+            height: 280px;
+            overflow: hidden;
+            background: var(--bg-light);
+        }
+
+        .pet-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .pet-card:hover .pet-card-image img {
+            transform: scale(1.05);
+        }
+
+        .pet-card-content {
+            padding: 1.5rem;
+        }
+
+        .pet-card-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .pet-card-content p {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+
+        .card-link {
+            color: var(--primary-color);
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .card-link:hover {
+            color: var(--primary-dark);
+        }
+
+        /* ===========================
+           HELP CARDS
+           =========================== */
+        .help-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .help-card {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .help-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .help-card-icon {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .help-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .help-card p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        /* ===========================
+           FOOTER
+           =========================== */
+        .site-footer {
+            background: var(--text-dark);
+            color: var(--white);
+            padding: 3rem 5%;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto 2rem;
+        }
+
+        .footer-logo img {
+            height: 80px;
+            width: auto;
+            margin-bottom: 1rem;
+        }
+
+        .footer-info p {
+            margin-bottom: 0.5rem;
+            opacity: 0.9;
+        }
+
+        .footer-info a {
+            color: var(--secondary-color);
+            transition: opacity 0.3s;
+        }
+
+        .footer-info a:hover {
+            opacity: 0.8;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .footer-links a {
+            opacity: 0.9;
+            transition: opacity 0.3s;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+            color: var(--secondary-color);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.8;
+        }
+
+        /* ===========================
+           MOBILE RESPONSIVE
+           =========================== */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                right: -100%;
+                top: 80px; /* Adjust this to match your navbar height */
+                flex-direction: column;
+                background: var(--white);
+                width: 100%;
+                text-align: center;
+                transition: right 0.3s;
+                box-shadow: var(--shadow-lg);
+                padding: 2rem 0;
+                gap: 1.5rem;
+            }
+
+            .nav-links.nav-active {
+                right: 0;
+            }
+
+            .nav-donate {
+                margin-left: 0;
+            }
+
+            .burger {
+                display: flex;
+            }
+
+            .burger.toggle .line1 {
+                transform: rotate(-45deg) translate(-5px, 6px);
+            }
+
+            .burger.toggle .line2 {
+                opacity: 0;
+            }
+
+            .burger.toggle .line3 {
+                transform: rotate(45deg) translate(-5px, -6px);
+            }
+
+            .hero {
+                height: 70vh;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .hero-buttons .cta-button {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .content-section,
+            .content-section-colored {
+                padding: 3rem 5%;
+            }
+
+            .pet-grid,
+            .help-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .footer-logo img {
+                margin: 0 auto 1rem;
+            }
+
+            .footer-links {
+                align-items: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navbar {
+                padding: 1rem 4%;
+            }
+
+            .logo img {
+                height: 50px;
+            }
+            
+            .navbar {
+                --nav-height: 70px;
+                 height: var(--nav-height);
+            }
+            .nav-links {
+                 top: var(--nav-height);
+            }
+
+            .content-section,
+            .content-section-colored {
+                padding: 2.5rem 4%;
+            }
+
+            .help-card {
+                padding: 2rem 1.5rem;
+            }
+        }
+    </style>
 </head>
 <body>
 
@@ -20,8 +524,8 @@
                 <li><a href="#adopt">Adopt</a></li>
                 <li><a href="#help">Ways to Give</a></li>
                 <li><a href="#contact">Get Involved</a></li>
+                <li><a href="#help" class="cta-button primary nav-donate">Donate</a></li>
             </ul>
-             <a href="#help" class="cta-button nav-donate">Donate</a>
             <div class="burger">
                 <div class="line1"></div>
                 <div class="line2"></div>
@@ -46,8 +550,8 @@
 
         <!-- MISSION SECTION -->
         <section id="mission" class="content-section text-center">
-             <h2>Our Mission is Simple</h2>
-             <p class="section-subtitle">To advocate for and save the lives of vulnerable cats in our community through rescue, foster, and adoption.</p>
+             <h2>Our Mission</h2>
+             <p class="section-subtitle">Kit Kat Alley Rescue located in Hohenwald, TN, a Veteran Operated, non-profit, no-kill volunteer organization serving the Lewis County and surrounding areas of Tennessee. We are dedicated to being the voice for our feline communities as well as our low income cat owners assisting in unwanted feline population by spay and neuter. Furthermore, we serve the feral cat community and hoarding situations involving TNR (trap, neuter, release) We rescue cats in distress without regard to age, breed or ease of placement. Cats with greatest and immediate need take priority.</p>
         </section>
 
 
@@ -61,39 +565,39 @@
                 <!-- Card 1 -->
                 <div class="pet-card">
                     <div class="pet-card-image">
-                        <img src="https://i.imgur.com/2JhRPjw.jpeg" alt="A beautiful long-haired cat named Whiskers">
+                        <img src="https://i.imgur.com/2JhRPjw.jpeg" alt="A beautiful long-haired cat available for adoption">
                     </div>
                     <div class="pet-card-content">
-                        <h3>Whiskers</h3>
-                        <p>A sweet and gentle soul who loves sunny spots and cozy laps. Great with kids!</p>
-                        <a href="#" class="card-link">Learn More &rarr;</a>
+                        <h3>A Loving Friend</h3>
+                        <p>This sweet cat is looking for a safe and loving home. Contact us to learn more!</p>
+                        <a href="#contact" class="card-link">Learn More &rarr;</a>
                     </div>
                 </div>
                 <!-- Card 2 -->
                 <div class="pet-card">
                     <div class="pet-card-image">
-                        <img src="https://i.imgur.com/Vk0ETv2.jpeg" alt="A playful orange tabby cat named Ginger">
+                        <img src="https://i.imgur.com/Vk0ETv2.jpeg" alt="A playful orange tabby cat available for adoption">
                     </div>
                     <div class="pet-card-content">
-                        <h3>Ginger</h3>
-                        <p>This adventurous boy is full of energy and curiosity. He loves to play with feather toys.</p>
-                        <a href="#" class="card-link">Learn More &rarr;</a>
+                        <h3>Ready to Play</h3>
+                        <p>Full of personality and ready for a new family. Could this be your new best friend?</p>
+                        <a href="#contact" class="card-link">Learn More &rarr;</a>
                     </div>
                 </div>
                 <!-- Card 3 -->
                 <div class="pet-card">
                     <div class="pet-card-image">
-                       <img src="https://i.imgur.com/Xka101Q.jpeg" alt="A calm grey cat named Smokey">
+                       <img src="https://i.imgur.com/Xka101Q.jpeg" alt="A calm grey cat available for adoption">
                     </div>
                     <div class="pet-card-content">
-                        <h3>Smokey</h3>
-                        <p>A calm and affectionate lady who would make the perfect companion for quiet evenings.</p>
-                        <a href="#" class="card-link">Learn More &rarr;</a>
+                        <h3>A Gentle Soul</h3>
+                        <p>This calm and affectionate cat would make the perfect companion for quiet evenings.</p>
+                        <a href="#contact" class="card-link">Learn More &rarr;</a>
                     </div>
                 </div>
             </div>
             <div class="text-center">
-                <a href="#" class="cta-button primary">View All Adoptable Pets</a>
+                <a href="#contact" class="cta-button primary">View All Adoptable Pets</a>
             </div>
         </section>
 
@@ -133,8 +637,11 @@
             </div>
             <div class="footer-info">
                  <p><strong>Kit Kat Alley Rescue</strong></p>
-                 <p>616 THOMAS AVE, HOHENWALD, TN 38462</p>
-                 <p><a href="mailto:Kitkatalleyrescue@yahoo.com">Kitkatalleyrescue@yahoo.com</a></p>
+                 <p>Stephanie Pinckley, President</p>
+                 <p>P.O. Box 28, Hohenwald, TN 38462</p>
+                 <p>PH: <a href="tel:615-944-0522">615-944-0522</a> (please text first)</p>
+                 <p>Email: <a href="mailto:kitkatalleyrescue@yahoo.com">kitkatalleyrescue@yahoo.com</a></p>
+                 <p>Facebook: <a href="https://www.facebook.com/kitkatallnyrescueltN" target="_blank" rel="noopener noreferrer">/kitkatallnyrescueltN</a></p>
             </div>
             <div class="footer-links">
                 <a href="#adopt">Adopt</a>
@@ -147,7 +654,49 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+        // Mobile Navigation Toggle
+        const burger = document.querySelector('.burger');
+        const nav = document.querySelector('.nav-links');
+        const navLinks = document.querySelectorAll('.nav-links li a');
+
+        // Toggle mobile menu
+        burger.addEventListener('click', () => {
+            nav.classList.toggle('nav-active');
+            burger.classList.toggle('toggle');
+        });
+
+        // Close mobile menu when clicking on a link
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                nav.classList.remove('nav-active');
+                burger.classList.remove('toggle');
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offsetTop = target.offsetTop - 80;
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!burger.contains(e.target) && !nav.contains(e.target)) {
+                nav.classList.remove('nav-active');
+                burger.classList.remove('toggle');
+            }
+        });
+    </script>
 </body>
 </html>
 
