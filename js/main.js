@@ -31,10 +31,11 @@ function initNavigation() {
 }
 
 function statusLabel(animal) {
-    if (animal.status === 'adopted') return 'ADOPTED';
-    if (animal.status === 'pre-adoption') return 'PRE-ADOPTION';
-    if (animal.isTodo) return 'INTAKE';
-    return animal.species.toUpperCase();
+    if (animal.status === 'adopted') return 'Adopted';
+    if (animal.id === 'pepper' || animal.status === 'available') return 'Up for adoption';
+    if (animal.status === 'pre-adoption') return 'Pre-adoption';
+    if (animal.isTodo) return 'Intake';
+    return animal.species;
 }
 
 function initPetGrid() {
@@ -50,14 +51,23 @@ function initPetGrid() {
 
         let items = ANIMALS;
         if (isHomepage) {
-            items = ANIMALS.filter(a => a.featured).slice(0, 6);
+            items = ANIMALS.filter(a => a.featured);
         } else if (filter === 'adopted') {
             items = ANIMALS.filter(a => a.status === 'adopted');
         } else if (filter !== 'all') {
-            items = ANIMALS.filter(a => a.species === filter && a.status !== 'adopted');
+            items = ANIMALS.filter(a => a.species === filter);
         } else {
-            items = ANIMALS.filter(a => a.status !== 'adopted');
+            items = ANIMALS;
         }
+
+        // Sort Pepper first, then the adopted cats
+        items = items.slice().sort((a, b) => {
+            const aIsPepper = a.id === 'pepper' || a.status === 'available';
+            const bIsPepper = b.id === 'pepper' || b.status === 'available';
+            if (aIsPepper && !bIsPepper) return -1;
+            if (!aIsPepper && bIsPepper) return 1;
+            return 0;
+        });
 
         if (items.length === 0) {
             petGrid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 3rem; color: var(--text-muted);">
@@ -71,7 +81,7 @@ function initPetGrid() {
             const card = document.createElement('div');
             card.className = 'pet-card';
             const badgeClass = animal.status === 'adopted' ? 'badge-todo' : (animal.species === 'cat' ? 'badge-cat' : 'badge-dog');
-            const cta = animal.status === 'adopted' ? 'Read her story' : 'View Profile';
+            const cta = animal.status === 'adopted' ? 'Read story' : 'View Profile';
 
             card.innerHTML = `
                 <div class="pet-card-image">
@@ -119,15 +129,16 @@ function initAnimalProfile() {
     `).join('');
 
     const action = adopted
-        ? `<p style="font-weight: 700; color: var(--secondary);">Angel has been adopted. Congratulations to the Reeves family.</p>`
+        ? `<p style="font-weight: 700; color: var(--secondary);">${animal.name} has been adopted. Thank you for supporting rescue work.</p>`
         : `<a href="adopt.html?animal=${encodeURIComponent(animal.name)}#adoption-form" class="btn btn-primary" style="flex: 1; min-width: 200px;">${animal.status === 'pre-adoption' ? 'Pre-adopt ' + animal.name : 'Apply to adopt ' + animal.name}</a>`;
 
+    const profileBadgeClass = adopted ? 'badge-todo' : (animal.species === 'cat' ? 'badge-cat' : 'badge-dog');
 
     profileContainer.innerHTML = `
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start;">
             <div>${gallery}</div>
             <div>
-                <span class="pet-badge badge-cat" style="position: static; display: inline-block; margin-bottom: 0.75rem;">${statusLabel(animal)}</span>
+                <span class="pet-badge ${profileBadgeClass}" style="position: static; display: inline-block; margin-bottom: 0.75rem;">${statusLabel(animal)}</span>
                 <h1 style="margin-bottom: 0.5rem;">${animal.name}</h1>
                 <p style="font-size: 1.1rem; color: var(--text-muted); font-weight: 600; margin-bottom: 1.5rem;">
                     ${animal.breed} • ${animal.age} • ${animal.sex}
