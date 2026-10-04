@@ -120,7 +120,8 @@ function initAnimalProfile() {
 
     const action = adopted
         ? `<p style="font-weight: 700; color: var(--secondary);">Angel has been adopted. Congratulations to the Reeves family.</p>`
-        : `<a href="adopt.html?animal=${encodeURIComponent(animal.name)}#adoption-form" class="btn btn-primary" style="flex: 1; min-width: 200px;">Pre-adopt ${animal.name}</a>`;
+        : `<a href="adopt.html?animal=${encodeURIComponent(animal.name)}#adoption-form" class="btn btn-primary" style="flex: 1; min-width: 200px;">${animal.status === 'pre-adoption' ? 'Pre-adopt ' + animal.name : 'Apply to adopt ' + animal.name}</a>`;
+
 
     profileContainer.innerHTML = `
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start;">
