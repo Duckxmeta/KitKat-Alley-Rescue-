@@ -1,118 +1,45 @@
 /**
- * Kit Kat Alley Rescue - Adoptable Animals Dataset
- * Real adoptable cats and dogs rescued in Hohenwald and Lewis County, TN.
+ * Kit Kat Alley Rescue - animals from the rescue's own Facebook posts.
+ * Real photos belong in /images. Do not put generated pets back on the site.
  */
 
 const ANIMALS = [
     {
-        id: "jasper",
-        name: "Jasper",
+        id: "pepper",
+        name: "Pepper",
         species: "cat",
-        breed: "Domestic Shorthair Tabby",
-        age: "2 years",
-        sex: "Male (Neutered)",
-        image: "images/cat_jasper.jpg",
-        shortStory: "Rescued from a local Middle Tennessee farm colony. Sweet, playful, and loves window perches.",
-        story: "Jasper was brought into Kit Kat Alley Rescue after being discovered in a farm colony in Lewis County, TN. He underwent complete medical intake including parasite treatment, vaccinations, and neuter surgery. Jasper is exceptionally affectionate, loves head scratches, and gets along wonderfully with other rescue cats.",
-        goodWith: "Cats, Children, Calm Dogs",
-        fee: "$75 (Includes spay/neuter, microchip & core vaccines)",
+        breed: "Gray tabby",
+        age: "8 weeks",
+        sex: "Female",
+        status: "pre-adoption",
+        image: "images/pepper-1.jpg",
+        images: ["images/pepper-1.jpg", "images/pepper-2.jpg"],
+        shortStory: "New intake. Sweet 8-week-old gray tabby, already a cuddle pro. Pre-adoption applications are open while she finishes recovering.",
+        story: "The Kit Kat Alley Rescue family just grew by four tiny paws. Pepper is an 8-week-old gray tabby: incredibly sweet, perfectly clean, and already a certified master of cuddles. She has been dealing with a minor upper respiratory infection and is recovering beautifully with Terramycin. Her full veterinary work-up is scheduled for October 14, 2026, so she has a little extra time to get strong. Pre-adoption applications are open now. Message Kit Kat Alley Rescue or Stephanie on Facebook, or email kitkatalleyrescue@yahoo.com.",
+        goodWith: "People who want a cuddly kitten. Ask us about other pets.",
+        fee: "Pre-adoption application open. Fee confirmed when she is medically cleared.",
         featured: true,
         isTodo: false
     },
     {
-        id: "bella",
-        name: "Bella",
-        species: "dog",
-        breed: "Hound Mix",
-        age: "3 years",
-        sex: "Female (Spayed)",
-        image: "images/dog_bella.jpg",
-        shortStory: "Friendly hound mix rescued in Hohenwald. Great on a leash and adores belly rubs.",
-        story: "Bella was rescued right here in Hohenwald, TN when her previous owner experienced housing hardship. She is a gentle, medium-energy hound mix who loves outdoor walks and cozy nap spots. She is fully vaccinated, heartworm negative, spayed, and ready for her forever family in Middle Tennessee.",
-        goodWith: "Dogs, Children, Families",
-        fee: "$120 (Includes spay/neuter, microchip & rabies vaccine)",
+        id: "angel",
+        name: "Angel",
+        species: "cat",
+        breed: "Domestic cat",
+        age: "Adopted",
+        sex: "Female",
+        status: "adopted",
+        image: "images/angel.jpg",
+        images: ["images/angel.jpg"],
+        shortStory: "Happy Adoption Day. Angel went home with the Reeves family.",
+        story: "Happy Adoption Day to Angel and the Reeves family. Thank you for saving a life and giving this beautiful girl a forever home. Adoption approved. Congratulations from Kit Kat Alley Rescue. Angel has been adopted.",
+        goodWith: "Her new family, the Reeves.",
+        fee: "Adopted",
         featured: true,
         isTodo: false
-    },
-    {
-        id: "shadow",
-        name: "Shadow",
-        species: "cat",
-        breed: "Tuxedo Domestic Shorthair",
-        age: "1 year",
-        sex: "Female (Spayed)",
-        image: "images/cat_shadow.jpg",
-        shortStory: "Sleek tuxedo cat with a gentle spirit. Loves sunny windows and cozy lap naps.",
-        story: "Shadow came to Kit Kat Alley Rescue during a community hoarding intake in Middle Tennessee. She has thrived in foster care, showing off her quiet, loving nature. She is fully vetted, spayed, and looking for a quiet home to settle into.",
-        goodWith: "Cats, Gentle Adults",
-        fee: "$75 (Includes spay/neuter, microchip & core vaccines)",
-        featured: true,
-        isTodo: false
-    },
-    {
-        id: "max",
-        name: "Max",
-        species: "dog",
-        breed: "Retriever / Shepherd Mix",
-        age: "4 years",
-        sex: "Male (Neutered)",
-        image: "images/dog_max.jpg",
-        shortStory: "Gentle retriever mix rescued in Lewis County. Loyal companion who loves yard play.",
-        story: "Max was rescued from a high-intake area in Lewis County, TN. He is a loyal, sweet-natured retriever mix who gets along well with everyone he meets. Fully vaccinated, neutered, and trained on basic leash commands.",
-        goodWith: "Dogs, Children, Adults",
-        fee: "$120 (Includes spay/neuter, microchip & vaccines)",
-        featured: true,
-        isTodo: false
-    },
-    /* 3 TODO cards for Facebook pull fallback as specified in brief */
-    {
-        id: "todo-card-1",
-        name: "Rescue Intake: Tabby / Mix",
-        species: "cat",
-        breed: "Domestic Shorthair (Check Facebook)",
-        age: "1–2 years (Estimated)",
-        sex: "Spayed / Vetted",
-        image: "images/hero_rescue_pets.jpg",
-        shortStory: "Recent rescue intake undergoing rehabilitation in foster care. See Facebook for live updates.",
-        story: "This cat was rescued from a Lewis County community cat site and is currently in foster care. Check our official Facebook page or contact kitkatalleyrescue@yahoo.com for adoption availability.",
-        goodWith: "Inquire with rescue",
-        fee: "$75 (Standard feline adoption fee - confirm with rescue)",
-        featured: true,
-        isTodo: true
-    },
-    {
-        id: "todo-card-2",
-        name: "Rescue Intake: Hound / Dog",
-        species: "dog",
-        breed: "Mixed Breed (Check Facebook)",
-        age: "Young Adult",
-        sex: "Neutered / Vetted",
-        image: "images/hero_rescue_pets.jpg",
-        shortStory: "Recent canine intake from Hohenwald, TN. Full medical assessment in progress.",
-        story: "Rescued in Lewis County, TN. Currently undergoing medical intake, heartworm testing, and foster prep. Visit our Facebook page for updated photos.",
-        goodWith: "Inquire with rescue",
-        fee: "$120 (Standard canine adoption fee - confirm with rescue)",
-        featured: false,
-        isTodo: true
-    },
-    {
-        id: "todo-card-3",
-        name: "Community TNR Kitten",
-        species: "cat",
-        breed: "Domestic Shorthair",
-        age: "Kitten / 5 Months",
-        sex: "Spayed / Neutered",
-        image: "images/hero_rescue_pets.jpg",
-        shortStory: "Kitten rescued during a local TNR project in Hohenwald. Available for foster-to-adopt.",
-        story: "Rescued during a Trap-Neuter-Release (TNR) project in Hohenwald, TN. Raised in foster care and ready for adoption.",
-        goodWith: "Cats, Families",
-        fee: "$75 (Standard feline adoption fee)",
-        featured: false,
-        isTodo: true
     }
 ];
 
-// Helper to retrieve animal by ID
 function getAnimalById(id) {
     return ANIMALS.find(a => a.id === id) || ANIMALS[0];
 }

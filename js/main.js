@@ -1,7 +1,6 @@
 /**
  * Kit Kat Alley Rescue - Main JavaScript
- * Handles navigation, interactive pet filters, dynamic profile loading,
- * giving band presets, and accessible form mailto prefill triggers with success UI.
+ * Navigation, pet cards, profiles, giving band, and mailto forms.
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -11,10 +10,6 @@ document.addEventListener('DOMContentLoaded', () => {
     initGivingBand();
     initForms();
 });
-
-/* ==========================================================================
-   NAVIGATION TOGGLE
-   ========================================================================== */
 
 function initNavigation() {
     const toggleBtn = document.querySelector('.mobile-toggle');
@@ -26,7 +21,6 @@ function initNavigation() {
             toggleBtn.setAttribute('aria-expanded', isOpen);
         });
 
-        // Close menu when clicking outside
         document.addEventListener('click', (e) => {
             if (!navMenu.contains(e.target) && !toggleBtn.contains(e.target)) {
                 navMenu.classList.remove('active');
@@ -36,9 +30,12 @@ function initNavigation() {
     }
 }
 
-/* ==========================================================================
-   PET GRID RENDERER & FILTERING
-   ========================================================================== */
+function statusLabel(animal) {
+    if (animal.status === 'adopted') return 'ADOPTED';
+    if (animal.status === 'pre-adoption') return 'PRE-ADOPTION';
+    if (animal.isTodo) return 'INTAKE';
+    return animal.species.toUpperCase();
+}
 
 function initPetGrid() {
     const petGrid = document.querySelector('#pet-grid-container');
@@ -54,14 +51,18 @@ function initPetGrid() {
         let items = ANIMALS;
         if (isHomepage) {
             items = ANIMALS.filter(a => a.featured).slice(0, 6);
+        } else if (filter === 'adopted') {
+            items = ANIMALS.filter(a => a.status === 'adopted');
         } else if (filter !== 'all') {
-            items = ANIMALS.filter(a => a.species === filter);
+            items = ANIMALS.filter(a => a.species === filter && a.status !== 'adopted');
+        } else {
+            items = ANIMALS.filter(a => a.status !== 'adopted');
         }
 
         if (items.length === 0) {
             petGrid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 3rem; color: var(--text-muted);">
-                <h3>No animals found in this category right now.</h3>
-                <p>Please check back soon or contact us directly at <a href="mailto:kitkatalleyrescue@yahoo.com">kitkatalleyrescue@yahoo.com</a>.</p>
+                <h3>No animals in this category right now.</h3>
+                <p>Pepper is accepting pre-adoption applications. Email <a href="mailto:kitkatalleyrescue@yahoo.com">kitkatalleyrescue@yahoo.com</a>.</p>
             </div>`;
             return;
         }
@@ -69,21 +70,20 @@ function initPetGrid() {
         items.forEach(animal => {
             const card = document.createElement('div');
             card.className = 'pet-card';
-            
-            const badgeClass = animal.isTodo ? 'badge-todo' : (animal.species === 'cat' ? 'badge-cat' : 'badge-dog');
-            const badgeLabel = animal.isTodo ? 'INTAKE / TODO' : animal.species.toUpperCase();
+            const badgeClass = animal.status === 'adopted' ? 'badge-todo' : (animal.species === 'cat' ? 'badge-cat' : 'badge-dog');
+            const cta = animal.status === 'adopted' ? 'Read her story' : 'View Profile';
 
             card.innerHTML = `
                 <div class="pet-card-image">
-                    <img src="${animal.image}" alt="${animal.name} - ${animal.breed}">
-                    <span class="pet-badge ${badgeClass}">${badgeLabel}</span>
+                    <img src="${animal.image}" alt="${animal.name}, ${animal.breed}">
+                    <span class="pet-badge ${badgeClass}">${statusLabel(animal)}</span>
                 </div>
                 <div class="pet-card-body">
                     <h3>${animal.name}</h3>
                     <div class="pet-card-meta">${animal.breed} • ${animal.age} • ${animal.sex}</div>
                     <p class="pet-card-story">${animal.shortStory}</p>
                     <div style="margin-top: auto; display: flex; gap: 0.5rem;">
-                        <a href="animal.html?id=${animal.id}" class="btn btn-outline" style="width: 100%;">View Profile</a>
+                        <a href="animal.html?id=${animal.id}" class="btn btn-outline" style="width: 100%;">${cta}</a>
                     </div>
                 </div>
             `;
@@ -91,10 +91,8 @@ function initPetGrid() {
         });
     }
 
-    // Initial render
     renderGrid('all');
 
-    // Filter button handlers
     filterButtons.forEach(btn => {
         btn.addEventListener('click', () => {
             filterButtons.forEach(b => b.classList.remove('active'));
@@ -104,58 +102,51 @@ function initPetGrid() {
     });
 }
 
-/* ==========================================================================
-   ANIMAL PROFILE RENDERER
-   ========================================================================== */
-
 function initAnimalProfile() {
     const profileContainer = document.querySelector('#animal-profile-container');
     if (!profileContainer || typeof ANIMALS === 'undefined') return;
 
     const urlParams = new URLSearchParams(window.location.search);
-    const animalId = urlParams.get('id') || 'jasper';
+    const animalId = urlParams.get('id') || 'pepper';
     const animal = getAnimalById(animalId);
+    const photos = animal.images && animal.images.length ? animal.images : [animal.image];
+    const adopted = animal.status === 'adopted';
 
-    document.title = `${animal.name} | Adoptable ${animal.species === 'cat' ? 'Cat' : 'Dog'} | Kit Kat Alley Rescue`;
+    document.title = `${animal.name} | Kit Kat Alley Rescue`;
 
-    const badgeClass = animal.isTodo ? 'badge-todo' : (animal.species === 'cat' ? 'badge-cat' : 'badge-dog');
+    const gallery = photos.map((src, i) => `
+        <img src="${src}" alt="${animal.name} photo ${i + 1}" style="width: 100%; height: ${i === 0 ? '420px' : '220px'}; object-fit: cover; border-radius: var(--radius-lg); box-shadow: var(--shadow-md); margin-bottom: 1rem;">
+    `).join('');
+
+    const action = adopted
+        ? `<p style="font-weight: 700; color: var(--secondary);">Angel has been adopted. Congratulations to the Reeves family.</p>`
+        : `<a href="adopt.html?animal=${encodeURIComponent(animal.name)}#adoption-form" class="btn btn-primary" style="flex: 1; min-width: 200px;">Pre-adopt ${animal.name}</a>`;
 
     profileContainer.innerHTML = `
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start;">
+            <div>${gallery}</div>
             <div>
-                <img src="${animal.image}" alt="${animal.name}" style="width: 100%; height: 420px; object-fit: cover; border-radius: var(--radius-lg); box-shadow: var(--shadow-md);">
-            </div>
-            <div>
-                <span class="pet-badge ${badgeClass}" style="position: static; display: inline-block; margin-bottom: 0.75rem;">${animal.species.toUpperCase()}</span>
+                <span class="pet-badge badge-cat" style="position: static; display: inline-block; margin-bottom: 0.75rem;">${statusLabel(animal)}</span>
                 <h1 style="margin-bottom: 0.5rem;">${animal.name}</h1>
                 <p style="font-size: 1.1rem; color: var(--text-muted); font-weight: 600; margin-bottom: 1.5rem;">
                     ${animal.breed} • ${animal.age} • ${animal.sex}
                 </p>
-
                 <div style="background-color: var(--surface-white); border: 1px solid var(--border-color); padding: 1.5rem; border-radius: var(--radius-md); margin-bottom: 1.5rem;">
-                    <h3 style="font-size: 1.1rem; margin-bottom: 0.75rem; color: var(--secondary);">Rescue Story & Background</h3>
+                    <h3 style="font-size: 1.1rem; margin-bottom: 0.75rem; color: var(--secondary);">${adopted ? 'Adoption day' : 'Her story'}</h3>
                     <p style="margin-bottom: 1rem; line-height: 1.7;">${animal.story}</p>
-                    
                     <div style="border-top: 1px solid var(--border-color); padding-top: 1rem; font-size: 0.95rem;">
                         <p><strong>Good with:</strong> ${animal.goodWith}</p>
-                        <p><strong>Adoption Fee:</strong> ${animal.fee}</p>
+                        <p><strong>Adoption:</strong> ${animal.fee}</p>
                     </div>
                 </div>
-
                 <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-                    <a href="adopt.html#adoption-form?animal=${encodeURIComponent(animal.name)}" class="btn btn-primary" style="flex: 1; min-width: 200px;">
-                        Apply to Adopt ${animal.name}
-                    </a>
-                    <a href="adopt.html" class="btn btn-outline">Back to All Animals</a>
+                    ${action}
+                    <a href="adopt.html" class="btn btn-outline">Back to animals</a>
                 </div>
             </div>
         </div>
     `;
 }
-
-/* ==========================================================================
-   GIVING BAND PRESETS
-   ========================================================================== */
 
 function initGivingBand() {
     const presetBtns = document.querySelectorAll('.giving-preset-btn');
@@ -166,28 +157,15 @@ function initGivingBand() {
             btn.addEventListener('click', () => {
                 presetBtns.forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
-                const amount = btn.dataset.amount;
-                donateLink.href = `donate.html?amount=${amount}`;
+                donateLink.href = `donate.html?amount=${btn.dataset.amount}`;
             });
         });
     }
 }
 
-/* ==========================================================================
-   FORM HANDLING & MAILTO PREFILL GENERATION
-   ========================================================================== */
-
-/**
- * Host email fallback:
- * Since static site hosts (GitHub Pages) do not process server-side mail scripts,
- * forms prefill a structured mailto link directly to kitkatalleyrescue@yahoo.com
- * and display an immediate success banner to the user.
- */
 function initForms() {
-    // 1. Adoption Form
     const adoptionForm = document.querySelector('#form-adoption');
     if (adoptionForm) {
-        // Prefill animal name if query param present
         const urlParams = new URLSearchParams(window.location.search);
         const animalParam = urlParams.get('animal');
         if (animalParam) {
@@ -199,171 +177,124 @@ function initForms() {
             e.preventDefault();
             const formData = new FormData(adoptionForm);
             const name = formData.get('name') || 'Applicant';
-            const email = formData.get('email') || '';
-            const phone = formData.get('phone') || '';
-            const address = formData.get('address') || '';
-            const city = formData.get('city') || '';
-            const species = formData.get('species_wanted') || '';
-            const animalName = formData.get('animal_name') || 'Not specified';
-            const housing = formData.get('housing') || '';
-            const landlord = formData.get('landlord_permission') || '';
-            const otherPets = formData.get('other_pets') || '';
-            const vetName = formData.get('vet_name') || '';
-            const whyAnimal = formData.get('why_this_animal') || '';
-            const anyoneHome = formData.get('anyone_home') || '';
-
             const subject = `Adoption application — ${name}`;
             const body = `Kit Kat Alley Rescue Adoption Application:
 
 Applicant Name: ${name}
-Phone: ${phone}
-Email: ${email}
-Address: ${address}, ${city}
+Phone: ${formData.get('phone') || ''}
+Email: ${formData.get('email') || ''}
+Address: ${formData.get('address') || ''}, ${formData.get('city') || ''}
 
-Species Interested In: ${species}
-Specific Animal Name: ${animalName}
-Housing (Own/Rent): ${housing}
-Landlord Permission: ${landlord}
-Other Pets in Home: ${otherPets}
-Vet Name / Reference: ${vetName}
-Anyone Home During the Day: ${anyoneHome}
+Species Interested In: ${formData.get('species_wanted') || ''}
+Specific Animal Name: ${formData.get('animal_name') || 'Not specified'}
+Housing (Own/Rent): ${formData.get('housing') || ''}
+Landlord Permission: ${formData.get('landlord_permission') || ''}
+Other Pets in Home: ${formData.get('other_pets') || ''}
+Vet Name / Reference: ${formData.get('vet_name') || ''}
+Anyone Home During the Day: ${formData.get('anyone_home') || ''}
 
 Why this animal / Additional notes:
-${whyAnimal}`;
-
+${formData.get('why_this_animal') || ''}`;
             triggerMailtoAndSuccess(adoptionForm, subject, body);
         });
     }
 
-    // 2. Volunteer Form
     const volunteerForm = document.querySelector('#form-volunteer');
     if (volunteerForm) {
         volunteerForm.addEventListener('submit', (e) => {
             e.preventDefault();
             const formData = new FormData(volunteerForm);
             const name = formData.get('name') || 'Volunteer';
-            const email = formData.get('email') || '';
-            const phone = formData.get('phone') || '';
-            const city = formData.get('city') || '';
-            const interests = formData.getAll('interests').join(', ') || 'General';
-            const availability = formData.get('availability') || '';
-
             const subject = `Volunteer application — ${name}`;
             const body = `Kit Kat Alley Rescue Volunteer Application:
 
 Name: ${name}
-Phone: ${phone}
-Email: ${email}
-City: ${city}
-Areas of Interest: ${interests}
-Availability: ${availability}`;
-
+Phone: ${formData.get('phone') || ''}
+Email: ${formData.get('email') || ''}
+City: ${formData.get('city') || ''}
+Areas of Interest: ${formData.getAll('interests').join(', ') || 'General'}
+Availability: ${formData.get('availability') || ''}`;
             triggerMailtoAndSuccess(volunteerForm, subject, body);
         });
     }
 
-    // 3. Board Interest Form
     const boardForm = document.querySelector('#form-board');
     if (boardForm) {
         boardForm.addEventListener('submit', (e) => {
             e.preventDefault();
             const formData = new FormData(boardForm);
             const name = formData.get('name') || 'Applicant';
-            const email = formData.get('email') || '';
-            const phone = formData.get('phone') || '';
-            const city = formData.get('city') || '';
-            const background = formData.get('background') || '';
-            const whyServe = formData.get('why_serve') || '';
-
             const subject = `Board interest — ${name}`;
             const body = `Kit Kat Alley Rescue Board Member Interest:
 
 Name: ${name}
-Phone: ${phone}
-Email: ${email}
-City: ${city}
+Phone: ${formData.get('phone') || ''}
+Email: ${formData.get('email') || ''}
+City: ${formData.get('city') || ''}
 
 Professional & Volunteer Background:
-${background}
+${formData.get('background') || ''}
 
 Why I want to serve on the Board:
-${whyServe}`;
-
+${formData.get('why_serve') || ''}`;
             triggerMailtoAndSuccess(boardForm, subject, body);
         });
     }
 
-    // 4. Spay / Neuter & TNR Request Form
     const tnrForm = document.querySelector('#form-tnr');
     if (tnrForm) {
         tnrForm.addEventListener('submit', (e) => {
             e.preventDefault();
             const formData = new FormData(tnrForm);
             const name = formData.get('name') || 'Requester';
-            const email = formData.get('email') || '';
-            const phone = formData.get('phone') || '';
-            const cityCounty = formData.get('city_county') || '';
-            const species = formData.get('species') || '';
-            const count = formData.get('count') || '1';
-            const ownedOrFeral = formData.get('owned_or_feral') || '';
-            const incomeQualified = formData.get('income_qualified') || '';
-            const timing = formData.get('timing') || '';
+            const subject = `Spay/neuter registration — ${name}`;
+            const body = `Kit Kat Alley Rescue spay/neuter registration
+Clinic: Linden Animal Clinic day. October 14, 2026 is FULL. This request is for the next clinic.
 
-            const subject = `Spay/Neuter/TNR request — ${name}`;
-            const body = `Kit Kat Alley Rescue Spay/Neuter & TNR Assistance Request:
+Owner name: ${name}
+Phone: ${formData.get('phone') || ''}
+Email: ${formData.get('email') || ''}
+City / County: ${formData.get('city_county') || ''}
+Drop-off: ${formData.get('dropoff') || ''}
+Cat sex: ${formData.get('cat_sex') || ''}
+Number of cats: ${formData.get('count') || '1'}
+Owned or community cat: ${formData.get('owned_or_feral') || ''}
+Committed to attending: ${formData.get('committed') || ''}
+Notes: ${formData.get('timing') || ''}
 
-Requester Name: ${name}
-Phone: ${phone}
-Email: ${email}
-City / County: ${cityCounty}
-
-Animals (Cats/Dogs): ${species}
-Number of Animals: ${count}
-Status: ${ownedOrFeral}
-Income Qualified (Yes/No): ${incomeQualified}
-Preferred Timing: ${timing}`;
-
+Copays go to the clinic: female $60, male $50. Kit Kat Alley Rescue covers rabies vaccines, transport, and additional care.
+Lewis County drop-off when a clinic is open: 7:00 AM at Tractor Supply Co., 608 E Main St, Hohenwald. Pickup 2:00 PM.
+Perry County drop-off: 8:00 AM at Linden Animal Clinic. Pickup 12:00 PM.`;
             triggerMailtoAndSuccess(tnrForm, subject, body);
         });
     }
 
-    // 5. General Contact Form
     const contactForm = document.querySelector('#form-contact');
     if (contactForm) {
         contactForm.addEventListener('submit', (e) => {
             e.preventDefault();
             const formData = new FormData(contactForm);
             const name = formData.get('name') || 'Inquirer';
-            const email = formData.get('email') || '';
-            const phone = formData.get('phone') || '';
-            const message = formData.get('message') || '';
-
             const subject = `Inquiry — ${name}`;
             const body = `Kit Kat Alley Rescue Website Contact Inquiry:
 
 Name: ${name}
-Phone: ${phone}
-Email: ${email}
+Phone: ${formData.get('phone') || ''}
+Email: ${formData.get('email') || ''}
 
 Message:
-${message}`;
-
+${formData.get('message') || ''}`;
             triggerMailtoAndSuccess(contactForm, subject, body);
         });
     }
 }
 
 function triggerMailtoAndSuccess(formElement, subject, body) {
-    const mailtoUrl = `mailto:kitkatalleyrescue@yahoo.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    
-    // Open user default mail app
-    window.location.href = mailtoUrl;
-
-    // Show success feedback on page
+    window.location.href = `mailto:kitkatalleyrescue@yahoo.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     const banner = formElement.querySelector('.form-success-banner');
     if (banner) {
         banner.style.display = 'block';
-        banner.innerHTML = `<strong>Application Prepared!</strong> Sent. We reply by email at kitkatalleyrescue@yahoo.com. If your email app did not open automatically, please send your details directly to <strong>kitkatalleyrescue@yahoo.com</strong>.`;
+        banner.innerHTML = `<strong>Email opened with your details filled in.</strong> Send it to kitkatalleyrescue@yahoo.com. If your mail app did not open, copy the form and email that address directly.`;
         banner.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 }
