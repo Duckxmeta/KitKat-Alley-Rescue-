@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adopt Cats & Dogs | Kit Kat Alley Rescue - Hohenwald, TN</title>
+    <meta name="description" content="Adopt rescued cats and dogs from Kit Kat Alley Rescue in Hohenwald, TN. Filter available pets, view medical stories, and submit an adoption application.">
+    <link rel="canonical" href="https://kitkatalleyrescue.org/adopt.html">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <!-- HEADER / NAVIGATION -->
+    <header class="site-header">
+        <div class="container navbar">
+            <a href="index.html" class="brand-logo">
+                <img src="https://i.imgur.com/Iwi3Iu7.png" alt="Kit Kat Alley Rescue Logo">
+                <div class="brand-title">
+                    <span class="main-name">Kit Kat Alley Rescue</span>
+                    <span class="sub-name">Hohenwald, TN • No-Kill 501(c)(3)</span>
+                </div>
+            </a>
+
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="adopt.html" class="nav-link active">Adopt</a></li>
+                    <li><a href="foster.html" class="nav-link">Foster</a></li>
+                    <li><a href="spay-neuter.html" class="nav-link">Spay / Neuter & TNR</a></li>
+                    <li><a href="volunteer.html" class="nav-link">Volunteer</a></li>
+                    <li><a href="about.html" class="nav-link">About Us</a></li>
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+
+            <div class="nav-cta">
+                <a href="donate.html" class="btn btn-donate-nav">Donate</a>
+                <button class="mobile-toggle" aria-label="Toggle Navigation Menu">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- PAGE BANNER -->
+        <section class="section-padding" style="background-color: var(--secondary); color: var(--surface-white); padding: 3.5rem 0;">
+            <div class="container text-center">
+                <h1 style="color: var(--surface-white); margin-bottom: 0.75rem;">Adoptable Cats & Dogs</h1>
+                <p style="font-size: 1.15rem; max-width: 700px; margin: 0 auto; color: rgba(255,255,255,0.9);">
+                    Meet our rescued animals waiting for forever homes in Hohenwald, Lewis County, and surrounding Middle Tennessee counties.
+                </p>
+            </div>
+        </section>
+
+        <!-- FILTER & ADOPTION GRID -->
+        <section class="section-padding" style="background-color: var(--bg-cream);">
+            <div class="container">
+                <!-- Filter Buttons -->
+                <div class="filter-bar">
+                    <button type="button" class="filter-btn active" data-filter="all">All Animals</button>
+                    <button type="button" class="filter-btn" data-filter="cat">Cats</button>
+                    <button type="button" class="filter-btn" data-filter="dog">Dogs</button>
+                </div>
+
+                <!-- Pet Grid container populated by js/main.js -->
+                <div id="pet-grid-container" class="pet-grid" data-homepage="false"></div>
+            </div>
+        </section>
+
+        <!-- ADOPTION APPLICATION FORM SECTION -->
+        <section id="adoption-form" class="section-padding" style="background-color: var(--surface-white); border-top: 1px solid var(--border-color);">
+            <div class="container container-narrow">
+                <div class="section-header">
+                    <h2>Adoption Application</h2>
+                    <p>Interested in adding a companion to your family? Complete the application below. We review all applications promptly and will follow up by email.</p>
+                </div>
+
+                <div class="form-card">
+                    <div class="form-success-banner"></div>
+
+                    <!-- Host email fallback comment: Form generates prefilled mailto link to kitkatalleyrescue@yahoo.com -->
+                    <form id="form-adoption">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name">Full Name <span class="required-star">*</span></label>
+                                <input type="text" id="name" name="name" required placeholder="Jane Doe">
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone Number <span class="required-star">*</span></label>
+                                <input type="tel" id="phone" name="phone" required placeholder="(931) 555-0199">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email">Email Address <span class="required-star">*</span></label>
+                                <input type="email" id="email" name="email" required placeholder="jane@example.com">
+                            </div>
+                            <div class="form-group">
+                                <label for="city">City / State <span class="required-star">*</span></label>
+                                <input type="text" id="city" name="city" required placeholder="Hohenwald, TN">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="address">Street Address <span class="required-star">*</span></label>
+                            <input type="text" id="address" name="address" required placeholder="123 Main Street">
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="species_wanted">Species Interested In <span class="required-star">*</span></label>
+                                <select id="species_wanted" name="species_wanted" required>
+                                    <option value="">Select Species...</option>
+                                    <option value="Cat">Cat</option>
+                                    <option value="Dog">Dog</option>
+                                    <option value="Either / Open">Open to Either</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="animal_name">Specific Animal Name (If Known)</label>
+                                <input type="text" id="animal_name" name="animal_name" placeholder="e.g. Jasper, Bella">
+                                <!-- TODO: Confirm adoption fees -->
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="housing">Housing Status <span class="required-star">*</span></label>
+                                <select id="housing" name="housing" required>
+                                    <option value="Own Home">Own Home</option>
+                                    <option value="Rent Home/Apartment">Rent Home / Apartment</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="landlord_permission">Landlord Permission (If Renting)</label>
+                                <select id="landlord_permission" name="landlord_permission">
+                                    <option value="N/A - Own Home">N/A (Own Home)</option>
+                                    <option value="Yes - Permission Granted">Yes - Permission Granted</option>
+                                    <option value="Pending">Pending Verification</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="other_pets">Other Pets Currently in Home</label>
+                            <input type="text" id="other_pets" name="other_pets" placeholder="e.g. 1 dog (spayed), 2 cats">
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="vet_name">Current / Preferred Vet Clinic Name</label>
+                                <input type="text" id="vet_name" name="vet_name" placeholder="e.g. Hohenwald Animal Clinic">
+                            </div>
+                            <div class="form-group">
+                                <label for="anyone_home">Is Anyone Home During the Day?</label>
+                                <input type="text" id="anyone_home" name="anyone_home" placeholder="e.g. Work from home, Retired, Student">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="why_this_animal">Why do you want to adopt this animal? <span class="required-star">*</span></label>
+                            <textarea id="why_this_animal" name="why_this_animal" required placeholder="Tell us about your home environment, family members, and companion expectations..."></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Submit Adoption Application</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- TRUST STRIP BANNER -->
+        <div class="trust-banner">
+            <div class="container">
+                Veteran-operated rescue for cats and dogs. Licensed and insured. In compliance with state and federal laws. EIN 88-3706741. Donations are tax-deductible to the extent allowed by law.
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>Kit Kat Alley Rescue</h3>
+                    <p>Veteran-operated, volunteer, no-kill 501(c)(3) organization. Serving Hohenwald, Lewis County, and surrounding Middle Tennessee counties since 2018.</p>
+                    <p><em>"We are the voice for the voiceless."</em></p>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="adopt.html">Adopt Cats & Dogs</a></li>
+                        <li><a href="foster.html">Foster Program</a></li>
+                        <li><a href="spay-neuter.html">Spay / Neuter & TNR</a></li>
+                        <li><a href="volunteer.html">Volunteer</a></li>
+                        <li><a href="board-interest.html">Board Member Interest</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Organization</h4>
+                    <ul class="footer-links">
+                        <li><a href="about.html">About & Leadership</a></li>
+                        <li><a href="donate.html">Ways to Donate</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="https://bestfriends.org/partners/kit-kat-alley-rescue" target="_blank" rel="noopener noreferrer">Best Friends Partner</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column footer-contact-info">
+                    <h4>Contact Info</h4>
+                    <p><strong>Kit Kat Alley Rescue Inc</strong></p>
+                    <p>PO Box 28, Hohenwald, TN 38462</p>
+                    <p>Email: <a href="mailto:kitkatalleyrescue@yahoo.com">kitkatalleyrescue@yahoo.com</a></p>
+                    <p>Phone: <a href="tel:615-944-0522">615-944-0522</a> (please text first)</p>
+                    <p>Facebook: <a href="https://www.facebook.com/kitkatallnyrescueltN" target="_blank" rel="noopener noreferrer">Facebook Page</a></p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p class="footer-trust-line">
+                    Veteran-operated rescue for cats and dogs. Licensed and insured. In compliance with state and federal laws. EIN 88-3706741. Donations are tax-deductible to the extent allowed by law.
+                </p>
+                <p>&copy; 2026 Kit Kat Alley Rescue. All rights reserved. Registered 501(c)(3) non-profit organization.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script src="js/animals-data.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

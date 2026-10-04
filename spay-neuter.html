@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spay / Neuter & TNR Assistance | Kit Kat Alley Rescue - Hohenwald, TN</title>
+    <meta name="description" content="Low-cost spay/neuter assistance and community cat Trap-Neuter-Release (TNR) programs in Hohenwald, Lewis County, and Middle Tennessee. Request assistance today.">
+    <link rel="canonical" href="https://kitkatalleyrescue.org/spay-neuter.html">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <!-- HEADER / NAVIGATION -->
+    <header class="site-header">
+        <div class="container navbar">
+            <a href="index.html" class="brand-logo">
+                <img src="https://i.imgur.com/Iwi3Iu7.png" alt="Kit Kat Alley Rescue Logo">
+                <div class="brand-title">
+                    <span class="main-name">Kit Kat Alley Rescue</span>
+                    <span class="sub-name">Hohenwald, TN • No-Kill 501(c)(3)</span>
+                </div>
+            </a>
+
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="adopt.html" class="nav-link">Adopt</a></li>
+                    <li><a href="foster.html" class="nav-link">Foster</a></li>
+                    <li><a href="spay-neuter.html" class="nav-link active">Spay / Neuter & TNR</a></li>
+                    <li><a href="volunteer.html" class="nav-link">Volunteer</a></li>
+                    <li><a href="about.html" class="nav-link">About Us</a></li>
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+
+            <div class="nav-cta">
+                <a href="donate.html" class="btn btn-donate-nav">Donate</a>
+                <button class="mobile-toggle" aria-label="Toggle Navigation Menu">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- PAGE BANNER -->
+        <section class="section-padding" style="background-color: var(--secondary); color: var(--surface-white); padding: 3.5rem 0;">
+            <div class="container text-center">
+                <h1 style="color: var(--surface-white); margin-bottom: 0.75rem;">Spay / Neuter & TNR Programs</h1>
+                <p style="font-size: 1.15rem; max-width: 750px; margin: 0 auto; color: rgba(255,255,255,0.9);">
+                    Humanely reducing animal overpopulation in Hohenwald, Lewis County, and Middle Tennessee through community cat trapping, low-cost owner assistance, and hoarding interventions.
+                </p>
+            </div>
+        </section>
+
+        <!-- PROGRAM DETAILS -->
+        <section class="section-padding" style="background-color: var(--bg-cream);">
+            <div class="container">
+                <div class="path-grid" style="grid-template-columns: repeat(3, 1fr); margin-bottom: 3.5rem;">
+                    <div class="path-tile">
+                        <h3>Community Cat TNR</h3>
+                        <p>Trap-Neuter-Release (TNR) humanely sterilizes, vaccinates, and returns feral/community cats to their outdoor colonies with volunteer caregivers.</p>
+                    </div>
+                    <div class="path-tile">
+                        <h3>Low-Cost Spay / Neuter</h3>
+                        <p>Financial assistance for low-income pet owners in Hohenwald and Lewis County to ensure cats and dogs receive essential sterilizations.</p>
+                    </div>
+                    <div class="path-tile">
+                        <h3>Hoarding Interventions</h3>
+                        <p>Compassionate rescue assistance, medical triage, and spay/neuter support for high-volume hoarding situations in Middle Tennessee.</p>
+                    </div>
+                </div>
+
+                <!-- REQUEST FORM -->
+                <div class="container-narrow">
+                    <div class="section-header">
+                        <h2>Spay / Neuter & TNR Assistance Request</h2>
+                        <p>Need assistance spaying/neutering owned pets or managing outdoor community cat colonies in Lewis County? Fill out the request form below.</p>
+                    </div>
+
+                    <div class="form-card">
+                        <div class="form-success-banner"></div>
+
+                        <!-- Host email fallback comment: Form generates prefilled mailto link to kitkatalleyrescue@yahoo.com -->
+                        <form id="form-tnr">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="name">Full Name <span class="required-star">*</span></label>
+                                    <input type="text" id="name" name="name" required placeholder="Jane Doe">
+                                </div>
+                                <div class="form-group">
+                                    <label for="phone">Phone Number <span class="required-star">*</span></label>
+                                    <input type="tel" id="phone" name="phone" required placeholder="(931) 555-0199">
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="email">Email Address <span class="required-star">*</span></label>
+                                    <input type="email" id="email" name="email" required placeholder="jane@example.com">
+                                </div>
+                                <div class="form-group">
+                                    <label for="city_county">City / County <span class="required-star">*</span></label>
+                                    <input type="text" id="city_county" name="city_county" required placeholder="Hohenwald, Lewis County, TN">
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="species">Species <span class="required-star">*</span></label>
+                                    <select id="species" name="species" required>
+                                        <option value="Cats">Cats (Feline)</option>
+                                        <option value="Dogs">Dogs (Canine)</option>
+                                        <option value="Both Cats and Dogs">Both Cats and Dogs</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="count">Approximate Number of Animals <span class="required-star">*</span></label>
+                                    <input type="number" id="count" name="count" min="1" max="100" required placeholder="e.g. 3">
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="owned_or_feral">Animal Status <span class="required-star">*</span></label>
+                                    <select id="owned_or_feral" name="owned_or_feral" required>
+                                        <option value="Owned Personal Pets">Owned Personal Pets</option>
+                                        <option value="Feral / Community Outdoor Cats">Feral / Community Outdoor Cats</option>
+                                        <option value="Stray / Surrender Intake">Stray / Surrender Intake</option>
+                                        <option value="Hoarding Situation">Hoarding Intervention</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="income_qualified">Income-Qualified Assistance Needed?</label>
+                                    <select id="income_qualified" name="income_qualified">
+                                        <option value="Yes">Yes - Requesting Financial Assistance</option>
+                                        <option value="No">No - Able to Contribute Towards Cost</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="timing">Preferred Timing & Additional Context <span class="required-star">*</span></label>
+                                <textarea id="timing" name="timing" required placeholder="Describe the situation, colony location, trapping access, or scheduling urgency..."></textarea>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary" style="width: 100%;">Submit Assistance Request</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TRUST STRIP BANNER -->
+        <div class="trust-banner">
+            <div class="container">
+                Veteran-operated rescue for cats and dogs. Licensed and insured. In compliance with state and federal laws. EIN 88-3706741. Donations are tax-deductible to the extent allowed by law.
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>Kit Kat Alley Rescue</h3>
+                    <p>Veteran-operated, volunteer, no-kill 501(c)(3) organization. Serving Hohenwald, Lewis County, and surrounding Middle Tennessee counties since 2018.</p>
+                    <p><em>"We are the voice for the voiceless."</em></p>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="adopt.html">Adopt Cats & Dogs</a></li>
+                        <li><a href="foster.html">Foster Program</a></li>
+                        <li><a href="spay-neuter.html">Spay / Neuter & TNR</a></li>
+                        <li><a href="volunteer.html">Volunteer</a></li>
+                        <li><a href="board-interest.html">Board Member Interest</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Organization</h4>
+                    <ul class="footer-links">
+                        <li><a href="about.html">About & Leadership</a></li>
+                        <li><a href="donate.html">Ways to Donate</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="https://bestfriends.org/partners/kit-kat-alley-rescue" target="_blank" rel="noopener noreferrer">Best Friends Partner</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column footer-contact-info">
+                    <h4>Contact Info</h4>
+                    <p><strong>Kit Kat Alley Rescue Inc</strong></p>
+                    <p>PO Box 28, Hohenwald, TN 38462</p>
+                    <p>Email: <a href="mailto:kitkatalleyrescue@yahoo.com">kitkatalleyrescue@yahoo.com</a></p>
+                    <p>Phone: <a href="tel:615-944-0522">615-944-0522</a> (please text first)</p>
+                    <p>Facebook: <a href="https://www.facebook.com/kitkatallnyrescueltN" target="_blank" rel="noopener noreferrer">Facebook Page</a></p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p class="footer-trust-line">
+                    Veteran-operated rescue for cats and dogs. Licensed and insured. In compliance with state and federal laws. EIN 88-3706741. Donations are tax-deductible to the extent allowed by law.
+                </p>
+                <p>&copy; 2026 Kit Kat Alley Rescue. All rights reserved. Registered 501(c)(3) non-profit organization.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script src="js/animals-data.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

@@ -3,700 +3,336 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kit Kat Alley Rescue - Saving Lives, One Paw at a Time</title>
+    <title>Kit Kat Alley Rescue | No-kill cat and dog rescue in Hohenwald, TN</title>
+    <meta name="description" content="Kit Kat Alley Rescue is a veteran-operated, 501(c)(3) no-kill volunteer rescue for cats and dogs in Hohenwald, Lewis County, and Middle Tennessee. Founded in 2018.">
+    <link rel="canonical" href="https://kitkatalleyrescue.org/">
+
+    <!-- Open Graph / Meta -->
+    <meta property="og:title" content="Kit Kat Alley Rescue | No-kill cat and dog rescue in Hohenwald, TN">
+    <meta property="og:description" content="Veteran-operated, volunteer, no-kill 501(c)(3) rescue serving Hohenwald, Lewis County, and surrounding Middle Tennessee counties. Rescue, rehab, adoption, foster, and TNR.">
+    <meta property="og:image" content="images/hero_rescue_pets.jpg">
+    <meta property="og:url" content="https://kitkatalleyrescue.org/">
+    <meta property="og:type" content="website">
+
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <style>
-        /* ===========================
-           RESET & BASE STYLES
-           =========================== */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-        :root {
-            --primary-color: #FF6B6B;
-            --primary-dark: #E85555;
-            --secondary-color: #4ECDC4;
-            --text-dark: #2D3436;
-            --text-light: #636E72;
-            --bg-light: #F8F9FA;
-            --white: #FFFFFF;
-            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.15);
-        }
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/styles.css">
 
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            line-height: 1.6;
-            color: var(--text-dark);
-            overflow-x: hidden;
-        }
-
-        img {
-            max-width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        /* ===========================
-           NAVIGATION
-           =========================== */
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 5%;
-            background: var(--white);
-            box-shadow: var(--shadow);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .logo img {
-            height: 60px;
-            width: auto;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-            align-items: center;
-        }
-
-        .nav-links a {
-            color: var(--text-dark);
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary-color);
-        }
-
-        .nav-donate {
-            margin-left: 1rem;
-        }
-
-        .burger {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-            gap: 4px;
-        }
-
-        .burger div {
-            width: 25px;
-            height: 3px;
-            background: var(--text-dark);
-            transition: all 0.3s;
-            border-radius: 3px;
-        }
-
-        /* ===========================
-           BUTTONS
-           =========================== */
-        .cta-button {
-            display: inline-block;
-            padding: 0.875rem 2rem;
-            border-radius: 8px;
-            font-weight: 600;
-            transition: all 0.3s;
-            cursor: pointer;
-            border: none;
-            font-size: 1rem;
-        }
-
-        .cta-button.primary {
-            background: var(--primary-color);
-            color: var(--white);
-        }
-
-        .cta-button.primary:hover {
-            background: var(--primary-dark);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .cta-button.secondary {
-            background: transparent;
-            color: var(--primary-color);
-            border: 2px solid var(--primary-color);
-        }
-
-        .cta-button.secondary:hover {
-            background: var(--primary-color);
-            color: var(--white);
-        }
-
-        .cta-button.full-width {
-            width: 100%;
-            text-align: center;
-        }
-
-        /* ===========================
-           HERO SECTION
-           =========================== */
-        .hero {
-            position: relative;
-            height: 85vh;
-            min-height: 500px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, rgba(255, 107, 107, 0.8) 0%, rgba(78, 205, 196, 0.8) 100%);
-            overflow: hidden;
-        }
-
-        .hero-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('https://i.imgur.com/2JhRPjw.jpeg') center/cover;
-            opacity: 0.3;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 1;
-            text-align: center;
-            color: var(--white);
-            padding: 2rem;
-            max-width: 800px;
-        }
-
-        .hero-content h1 {
-            font-size: clamp(2rem, 5vw, 3.5rem);
-            margin-bottom: 1rem;
-            font-weight: 700;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
-        }
-
-        .hero-content p {
-            font-size: clamp(1rem, 2vw, 1.25rem);
-            margin-bottom: 2rem;
-            opacity: 0.95;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        /* ===========================
-           CONTENT SECTIONS
-           =========================== */
-        .content-section {
-            padding: 5rem 5%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .content-section-colored {
-            padding: 5rem 5%;
-            background: var(--bg-light);
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .section-header h2 {
-            font-size: clamp(1.75rem, 4vw, 2.5rem);
-            margin-bottom: 1rem;
-            color: var(--text-dark);
-        }
-
-        .section-subtitle {
-            font-size: 1.125rem;
-            color: var(--text-light);
-            max-width: 700px;
-            margin: 0 auto;
-            line-height: 1.8;
-        }
-
-        .text-center {
-            text-align: center;
-        }
-
-        /* ===========================
-           PET CARDS
-           =========================== */
-        .pet-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
-            max-width: 1200px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .pet-card {
-            background: var(--white);
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .pet-card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .pet-card-image {
-            height: 280px;
-            overflow: hidden;
-            background: var(--bg-light);
-        }
-
-        .pet-card-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s;
-        }
-
-        .pet-card:hover .pet-card-image img {
-            transform: scale(1.05);
-        }
-
-        .pet-card-content {
-            padding: 1.5rem;
-        }
-
-        .pet-card-content h3 {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-            color: var(--text-dark);
-        }
-
-        .pet-card-content p {
-            color: var(--text-light);
-            margin-bottom: 1rem;
-        }
-
-        .card-link {
-            color: var(--primary-color);
-            font-weight: 600;
-            transition: color 0.3s;
-        }
-
-        .card-link:hover {
-            color: var(--primary-dark);
-        }
-
-        /* ===========================
-           HELP CARDS
-           =========================== */
-        .help-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .help-card {
-            background: var(--white);
-            padding: 2.5rem;
-            border-radius: 12px;
-            box-shadow: var(--shadow);
-            text-align: center;
-            transition: transform 0.3s;
-        }
-
-        .help-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .help-card-icon {
-            color: var(--primary-color);
-            margin-bottom: 1.5rem;
-        }
-
-        .help-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--text-dark);
-        }
-
-        .help-card p {
-            color: var(--text-light);
-            margin-bottom: 1.5rem;
-            line-height: 1.7;
-        }
-
-        /* ===========================
-           FOOTER
-           =========================== */
-        .site-footer {
-            background: var(--text-dark);
-            color: var(--white);
-            padding: 3rem 5%;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            max-width: 1200px;
-            margin: 0 auto 2rem;
-        }
-
-        .footer-logo img {
-            height: 80px;
-            width: auto;
-            margin-bottom: 1rem;
-        }
-
-        .footer-info p {
-            margin-bottom: 0.5rem;
-            opacity: 0.9;
-        }
-
-        .footer-info a {
-            color: var(--secondary-color);
-            transition: opacity 0.3s;
-        }
-
-        .footer-info a:hover {
-            opacity: 0.8;
-        }
-
-        .footer-links {
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-        }
-
-        .footer-links a {
-            opacity: 0.9;
-            transition: opacity 0.3s;
-        }
-
-        .footer-links a:hover {
-            opacity: 1;
-            color: var(--secondary-color);
-        }
-
-        .footer-bottom {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            opacity: 0.8;
-        }
-
-        /* ===========================
-           MOBILE RESPONSIVE
-           =========================== */
-        @media (max-width: 768px) {
-            .nav-links {
-                position: fixed;
-                right: -100%;
-                top: 80px; /* Adjust this to match your navbar height */
-                flex-direction: column;
-                background: var(--white);
-                width: 100%;
-                text-align: center;
-                transition: right 0.3s;
-                box-shadow: var(--shadow-lg);
-                padding: 2rem 0;
-                gap: 1.5rem;
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "AnimalShelter",
+          "@id": "https://kitkatalleyrescue.org/#organization",
+          "name": "Kit Kat Alley Rescue",
+          "legalName": "Kit Kat Alley Rescue Inc",
+          "url": "https://kitkatalleyrescue.org/",
+          "email": "kitkatalleyrescue@yahoo.com",
+          "taxID": "88-3706741",
+          "slogan": "We are the voice for the voiceless.",
+          "address": {
+            "@type": "PostalAddress",
+            "postOfficeBoxNumber": "PO Box 28",
+            "addressLocality": "Hohenwald",
+            "addressRegion": "TN",
+            "postalCode": "38462",
+            "addressCountry": "US"
+          },
+          "areaServed": [
+            {
+              "@type": "AdministrativeArea",
+              "name": "Lewis County, TN"
+            },
+            {
+              "@type": "City",
+              "name": "Hohenwald, TN"
+            },
+            {
+              "@type": "AdministrativeArea",
+              "name": "Middle Tennessee"
             }
-
-            .nav-links.nav-active {
-                right: 0;
-            }
-
-            .nav-donate {
-                margin-left: 0;
-            }
-
-            .burger {
-                display: flex;
-            }
-
-            .burger.toggle .line1 {
-                transform: rotate(-45deg) translate(-5px, 6px);
-            }
-
-            .burger.toggle .line2 {
-                opacity: 0;
-            }
-
-            .burger.toggle .line3 {
-                transform: rotate(45deg) translate(-5px, -6px);
-            }
-
-            .hero {
-                height: 70vh;
-            }
-
-            .hero-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .hero-buttons .cta-button {
-                width: 100%;
-                max-width: 300px;
-            }
-
-            .content-section,
-            .content-section-colored {
-                padding: 3rem 5%;
-            }
-
-            .pet-grid,
-            .help-grid {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-
-            .footer-content {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-
-            .footer-logo img {
-                margin: 0 auto 1rem;
-            }
-
-            .footer-links {
-                align-items: center;
-            }
+          ],
+          "knowsAbout": ["Cat Rescue", "Dog Rescue", "Animal Rehabilitation", "Trap Neuter Release", "Low-Cost Spay Neuter"]
+        },
+        {
+          "@type": "Person",
+          "name": "Stephanie Pinckley",
+          "jobTitle": "President & Founder",
+          "worksFor": { "@id": "https://kitkatalleyrescue.org/#organization" }
+        },
+        {
+          "@type": "Person",
+          "name": "Dennis Schroader Sr.",
+          "jobTitle": "Vice President",
+          "worksFor": { "@id": "https://kitkatalleyrescue.org/#organization" }
         }
-
-        @media (max-width: 480px) {
-            .navbar {
-                padding: 1rem 4%;
-            }
-
-            .logo img {
-                height: 50px;
-            }
-            
-            .navbar {
-                --nav-height: 70px;
-                 height: var(--nav-height);
-            }
-            .nav-links {
-                 top: var(--nav-height);
-            }
-
-            .content-section,
-            .content-section-colored {
-                padding: 2.5rem 4%;
-            }
-
-            .help-card {
-                padding: 2rem 1.5rem;
-            }
-        }
-    </style>
+      ]
+    }
+    </script>
 </head>
 <body>
 
-    <header>
-        <nav class="navbar">
-            <div class="logo">
-                <a href="#"><img src="https://i.imgur.com/Iwi3Iu7.png" alt="Kit Kat Alley Rescue Logo"></a>
+    <!-- HEADER / NAVIGATION -->
+    <header class="site-header">
+        <div class="container navbar">
+            <a href="index.html" class="brand-logo">
+                <img src="https://i.imgur.com/Iwi3Iu7.png" alt="Kit Kat Alley Rescue Logo">
+                <div class="brand-title">
+                    <span class="main-name">Kit Kat Alley Rescue</span>
+                    <span class="sub-name">Hohenwald, TN • No-Kill 501(c)(3)</span>
+                </div>
+            </a>
+
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link active">Home</a></li>
+                    <li><a href="adopt.html" class="nav-link">Adopt</a></li>
+                    <li><a href="foster.html" class="nav-link">Foster</a></li>
+                    <li><a href="spay-neuter.html" class="nav-link">Spay / Neuter & TNR</a></li>
+                    <li><a href="volunteer.html" class="nav-link">Volunteer</a></li>
+                    <li><a href="about.html" class="nav-link">About Us</a></li>
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+
+            <div class="nav-cta">
+                <a href="donate.html" class="btn btn-donate-nav">Donate</a>
+                <button class="mobile-toggle" aria-label="Toggle Navigation Menu">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
             </div>
-            <ul class="nav-links">
-                <li><a href="#adopt">Adopt</a></li>
-                <li><a href="#help">Ways to Give</a></li>
-                <li><a href="#contact">Get Involved</a></li>
-                <li><a href="#help" class="cta-button primary nav-donate">Donate</a></li>
-            </ul>
-            <div class="burger">
-                <div class="line1"></div>
-                <div class="line2"></div>
-                <div class="line3"></div>
-            </div>
-        </nav>
+        </div>
     </header>
 
     <main>
         <!-- HERO SECTION -->
-        <section class="hero">
-            <div class="hero-overlay"></div>
-            <div class="hero-content">
-                <h1>A Second Chance for Every Cat</h1>
-                <p>We rescue, rehabilitate, and rehome cats from our community, giving them the love and care they deserve.</p>
-                <div class="hero-buttons">
-                    <a href="#adopt" class="cta-button primary">Meet The Cats</a>
-                    <a href="#help" class="cta-button secondary">Support Our Mission</a>
+        <section class="hero-section">
+            <img src="images/hero_rescue_pets.jpg" alt="Rescued tabby cat and dog sitting side by side outdoors" class="hero-bg">
+            <div class="container hero-content">
+                <span class="hero-badge">Veteran-Operated • Volunteer • No-Kill 501(c)(3)</span>
+                <h1 class="hero-title">"We are the voice for the voiceless."</h1>
+                <p class="hero-subtitle">
+                    Veteran-operated, no-kill rescue for cats and dogs in Hohenwald and Lewis County, Tennessee. Volunteer rescue since 2018, providing medical rehabilitation, foster care, adoptions, and TNR assistance to animals in greatest immediate need.
+                </p>
+                <div class="hero-actions">
+                    <a href="adopt.html" class="btn btn-primary">Meet Animals</a>
+                    <a href="donate.html" class="btn btn-outline" style="border-color: #FFFFFF; color: #FFFFFF;">Support Our Mission</a>
                 </div>
             </div>
         </section>
 
-        <!-- MISSION SECTION -->
-        <section id="mission" class="content-section text-center">
-             <h2>Our Mission</h2>
-             <p class="section-subtitle">Kit Kat Alley Rescue located in Hohenwald, TN, a Veteran Operated, non-profit, no-kill volunteer organization serving the Lewis County and surrounding areas of Tennessee. We are dedicated to being the voice for our feline communities as well as our low income cat owners assisting in unwanted feline population by spay and neuter. Furthermore, we serve the feral cat community and hoarding situations involving TNR (trap, neuter, release) We rescue cats in distress without regard to age, breed or ease of placement. Cats with greatest and immediate need take priority.</p>
-        </section>
+        <!-- 4 EQUAL PATH TILES -->
+        <section class="path-tiles-section">
+            <div class="container">
+                <div class="path-grid">
+                    <!-- Tile 1: Adopt -->
+                    <div class="path-tile">
+                        <div class="path-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                            </svg>
+                        </div>
+                        <h3>Adopt a Pet</h3>
+                        <p>Find your new family companion. Browse vetted cats and dogs ready for loving homes in Middle TN.</p>
+                        <a href="adopt.html" class="btn btn-outline-secondary" style="width: 100%;">Find a Pet</a>
+                    </div>
 
+                    <!-- Tile 2: Foster -->
+                    <div class="path-tile">
+                        <div class="path-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                            </svg>
+                        </div>
+                        <h3>Become a Foster</h3>
+                        <p>Open your heart and home temporarily. We provide all food, supplies, and medical care needed.</p>
+                        <a href="foster.html" class="btn btn-outline-secondary" style="width: 100%;">Learn to Foster</a>
+                    </div>
 
-        <!-- ADOPT SECTION -->
-        <section id="adopt" class="content-section-colored">
-            <div class="section-header">
-                <h2>Ready for a Home</h2>
-                <p class="section-subtitle">These furry friends are waiting to start their new lives with you.</p>
-            </div>
-            <div class="pet-grid">
-                <!-- Card 1 -->
-                <div class="pet-card">
-                    <div class="pet-card-image">
-                        <img src="https://i.imgur.com/2JhRPjw.jpeg" alt="A beautiful long-haired cat available for adoption">
+                    <!-- Tile 3: Donate -->
+                    <div class="path-tile">
+                        <div class="path-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                        <h3>Make a Donation</h3>
+                        <p>100% of donations fund emergency medical care, food, spay/neuter, and rescue operations.</p>
+                        <a href="donate.html" class="btn btn-primary" style="width: 100%;">Ways to Give</a>
                     </div>
-                    <div class="pet-card-content">
-                        <h3>A Loving Friend</h3>
-                        <p>This sweet cat is looking for a safe and loving home. Contact us to learn more!</p>
-                        <a href="#contact" class="card-link">Learn More &rarr;</a>
-                    </div>
-                </div>
-                <!-- Card 2 -->
-                <div class="pet-card">
-                    <div class="pet-card-image">
-                        <img src="https://i.imgur.com/Vk0ETv2.jpeg" alt="A playful orange tabby cat available for adoption">
-                    </div>
-                    <div class="pet-card-content">
-                        <h3>Ready to Play</h3>
-                        <p>Full of personality and ready for a new family. Could this be your new best friend?</p>
-                        <a href="#contact" class="card-link">Learn More &rarr;</a>
-                    </div>
-                </div>
-                <!-- Card 3 -->
-                <div class="pet-card">
-                    <div class="pet-card-image">
-                       <img src="https://i.imgur.com/Xka101Q.jpeg" alt="A calm grey cat available for adoption">
-                    </div>
-                    <div class="pet-card-content">
-                        <h3>A Gentle Soul</h3>
-                        <p>This calm and affectionate cat would make the perfect companion for quiet evenings.</p>
-                        <a href="#contact" class="card-link">Learn More &rarr;</a>
-                    </div>
-                </div>
-            </div>
-            <div class="text-center">
-                <a href="#contact" class="cta-button primary">View All Adoptable Pets</a>
-            </div>
-        </section>
 
-        <!-- WAYS TO HELP SECTION -->
-        <section id="help" class="content-section">
-            <div class="section-header">
-                <h2>Ways You Can Help</h2>
-                <p class="section-subtitle">Your generosity powers our life-saving work. Every contribution makes a difference.</p>
-            </div>
-            <div class="help-grid">
-                <div class="help-card">
-                    <div class="help-card-icon">
-                        <!-- SVG icon for Donate -->
-                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+                    <!-- Tile 4: Spay / Neuter & TNR -->
+                    <div class="path-tile">
+                        <div class="path-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                            </svg>
+                        </div>
+                        <h3>Spay / Neuter & TNR</h3>
+                        <p>Low-cost spay/neuter assistance and community cat Trap-Neuter-Release in Lewis County.</p>
+                        <a href="spay-neuter.html" class="btn btn-outline-secondary" style="width: 100%;">TNR & Spay Info</a>
                     </div>
-                    <h3>Make a Donation</h3>
-                    <p>As a 501(c)(3), every dollar helps cover medical bills, food, and shelter. Donations are tax-deductible.</p>
-                    <a href="https://venmo.com/u/Kitkatalleyrescue" target="_blank" rel="noopener noreferrer" class="cta-button primary full-width">Donate via Venmo</a>
-                </div>
-                 <div id="contact" class="help-card">
-                    <div class="help-card-icon">
-                        <!-- SVG icon for Foster -->
-                       <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-                    </div>
-                    <h3>Foster or Volunteer</h3>
-                    <p>Open your home to a cat in need, or lend a hand at our facility. Fostering and volunteering saves lives.</p>
-                    <a href="mailto:Kitkatalleyrescue@yahoo.com" class="cta-button secondary full-width">Email Us To Get Involved</a>
                 </div>
             </div>
         </section>
-    </main>
 
-    <footer class="site-footer">
-        <div class="footer-content">
-            <div class="footer-logo">
-                 <img src="https://i.imgur.com/Iwi3Iu7.png" alt="Kit Kat Alley Rescue Logo">
+        <!-- GIVING BAND -->
+        <section class="giving-band">
+            <div class="container giving-container">
+                <div class="giving-info">
+                    <h2>Fuel Life-Saving Rescue Work</h2>
+                    <p>Every dollar directly supports medical care, parasite treatments, spay/neuter, and food for rescued animals in Hohenwald, TN.</p>
+                </div>
+
+                <div class="giving-widget">
+                    <div class="giving-presets">
+                        <button type="button" class="giving-preset-btn active" data-amount="25">$25</button>
+                        <button type="button" class="giving-preset-btn" data-amount="50">$50</button>
+                        <button type="button" class="giving-preset-btn" data-amount="100">$100</button>
+                    </div>
+                    <div class="giving-options">
+                        <span>Give Once</span>
+                        <span>•</span>
+                        <span>Monthly Support</span>
+                        <span>•</span>
+                        <span>In Honor / Memory</span>
+                    </div>
+                    <a href="donate.html?amount=25" id="giving-donate-link" class="btn btn-primary" style="width: 100%;">
+                        Continue to Donate Options
+                    </a>
+                </div>
             </div>
-            <div class="footer-info">
-                 <p><strong>Kit Kat Alley Rescue</strong></p>
-                 <p>Stephanie Pinckley, President</p>
-                 <p>P.O. Box 28, Hohenwald, TN 38462</p>
-                 <p>PH: <a href="tel:615-944-0522">615-944-0522</a> (please text first)</p>
-                 <p>Email: <a href="mailto:kitkatalleyrescue@yahoo.com">kitkatalleyrescue@yahoo.com</a></p>
-                 <p>Facebook: <a href="https://www.facebook.com/kitkatallnyrescueltN" target="_blank" rel="noopener noreferrer">/kitkatallnyrescueltN</a></p>
+        </section>
+
+        <!-- FEATURED ANIMALS SECTION -->
+        <section class="section-padding" style="background-color: var(--bg-cream);">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Meet Our Adoptable Animals</h2>
+                    <p>Each animal comes fully vetted, spayed or neutered, and microchipped. Animals in greatest immediate need always take priority.</p>
+                </div>
+
+                <!-- Pet Grid container populated by js/main.js -->
+                <div id="pet-grid-container" class="pet-grid" data-homepage="true"></div>
+
+                <div style="text-align: center; margin-top: 3rem;">
+                    <a href="adopt.html" class="btn btn-primary">View All Adoptable Cats & Dogs</a>
+                </div>
             </div>
-            <div class="footer-links">
-                <a href="#adopt">Adopt</a>
-                <a href="#help">Donate</a>
-                <a href="#contact">Volunteer</a>
+        </section>
+
+        <!-- WAYS TO GIVE PREVIEW -->
+        <section class="section-padding" style="background-color: var(--surface-white); border-top: 1px solid var(--border-color);">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Simple Ways to Support Kit Kat Alley Rescue</h2>
+                    <p>We accept direct donations via Venmo, PayPal, Zelle, and checks. All donations are tax-deductible to the extent allowed by law.</p>
+                </div>
+
+                <div class="path-grid" style="grid-template-columns: repeat(3, 1fr);">
+                    <!-- Venmo -->
+                    <div class="path-tile" style="background-color: #F0F7FF;">
+                        <h3 style="color: #008CFF;">Venmo</h3>
+                        <p>Send direct tax-deductible contributions to our official Venmo handle:</p>
+                        <p style="font-weight: 700; font-size: 1.1rem; color: var(--text-dark);">@Kitkatalleyrescue</p>
+                        <a href="https://venmo.com/u/Kitkatalleyrescue" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="border-color: #008CFF; color: #008CFF; margin-top: 1rem; width: 100%;">
+                            Open Venmo
+                        </a>
+                    </div>
+
+                    <!-- PayPal -->
+                    <!-- TODO: Confirm PayPal link -->
+                    <div class="path-tile" style="background-color: #FFF9F0;">
+                        <h3 style="color: #003087;">PayPal</h3>
+                        <p>Support medical intake and rescue supplies directly via PayPal:</p>
+                        <p style="font-weight: 700; font-size: 1.05rem; color: var(--text-dark);">kitkatalleyrescue@yahoo.com</p>
+                        <a href="donate.html#paypal" class="btn btn-outline" style="border-color: #003087; color: #003087; margin-top: 1rem; width: 100%;">
+                            PayPal Details
+                        </a>
+                    </div>
+
+                    <!-- Zelle -->
+                    <!-- TODO: Confirm Zelle phone number or email -->
+                    <div class="path-tile" style="background-color: #F5F3FF;">
+                        <h3 style="color: #74277D;">Zelle</h3>
+                        <p>Send instant donations with zero transaction fees via Zelle recipient:</p>
+                        <p style="font-weight: 700; font-size: 1.05rem; color: var(--text-dark);">kitkatalleyrescue@yahoo.com</p>
+                        <a href="donate.html#zelle" class="btn btn-outline" style="border-color: #74277D; color: #74277D; margin-top: 1rem; width: 100%;">
+                            Zelle Details
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TRUST STRIP BANNER -->
+        <div class="trust-banner">
+            <div class="container">
+                Veteran-operated rescue for cats and dogs. Licensed and insured. In compliance with state and federal laws. EIN 88-3706741. Donations are tax-deductible to the extent allowed by law.
             </div>
         </div>
-        <div class="footer-bottom">
-            <p>&copy; 2025 Kit Kat Alley Rescue. A registered 501(c)(3) non-profit organization.</p>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>Kit Kat Alley Rescue</h3>
+                    <p>Veteran-operated, volunteer, no-kill 501(c)(3) organization. Serving Hohenwald, Lewis County, and surrounding Middle Tennessee counties since 2018.</p>
+                    <p><em>"We are the voice for the voiceless."</em></p>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="adopt.html">Adopt Cats & Dogs</a></li>
+                        <li><a href="foster.html">Foster Program</a></li>
+                        <li><a href="spay-neuter.html">Spay / Neuter & TNR</a></li>
+                        <li><a href="volunteer.html">Volunteer</a></li>
+                        <li><a href="board-interest.html">Board Member Interest</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Organization</h4>
+                    <ul class="footer-links">
+                        <li><a href="about.html">About & Leadership</a></li>
+                        <li><a href="donate.html">Ways to Donate</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="https://bestfriends.org/partners/kit-kat-alley-rescue" target="_blank" rel="noopener noreferrer">Best Friends Partner</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column footer-contact-info">
+                    <h4>Contact Info</h4>
+                    <p><strong>Kit Kat Alley Rescue Inc</strong></p>
+                    <p>PO Box 28, Hohenwald, TN 38462</p>
+                    <p>Email: <a href="mailto:kitkatalleyrescue@yahoo.com">kitkatalleyrescue@yahoo.com</a></p>
+                    <p>Phone: <a href="tel:615-944-0522">615-944-0522</a> (please text first)</p>
+                    <p>Facebook: <a href="https://www.facebook.com/kitkatallnyrescueltN" target="_blank" rel="noopener noreferrer">Facebook Page</a></p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p class="footer-trust-line">
+                    Veteran-operated rescue for cats and dogs. Licensed and insured. In compliance with state and federal laws. EIN 88-3706741. Donations are tax-deductible to the extent allowed by law.
+                </p>
+                <p>&copy; 2026 Kit Kat Alley Rescue. All rights reserved. Registered 501(c)(3) non-profit organization.</p>
+            </div>
         </div>
     </footer>
 
-    <script>
-        // Mobile Navigation Toggle
-        const burger = document.querySelector('.burger');
-        const nav = document.querySelector('.nav-links');
-        const navLinks = document.querySelectorAll('.nav-links li a');
-
-        // Toggle mobile menu
-        burger.addEventListener('click', () => {
-            nav.classList.toggle('nav-active');
-            burger.classList.toggle('toggle');
-        });
-
-        // Close mobile menu when clicking on a link
-        navLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                nav.classList.remove('nav-active');
-                burger.classList.remove('toggle');
-            });
-        });
-
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    const offsetTop = target.offsetTop - 80;
-                    window.scrollTo({
-                        top: offsetTop,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-
-        // Close mobile menu when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!burger.contains(e.target) && !nav.contains(e.target)) {
-                nav.classList.remove('nav-active');
-                burger.classList.remove('toggle');
-            }
-        });
-    </script>
+    <!-- SCRIPTS -->
+    <script src="js/animals-data.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>
-
