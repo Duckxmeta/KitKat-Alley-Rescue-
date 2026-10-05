@@ -1,0 +1,15 @@
+{
+  "name": "kitkatalleyrescue",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@vercel/analytics": "^2.0.1"
+  }
+}
